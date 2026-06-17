@@ -1,0 +1,21 @@
+# AI Agent Workspace Rules
+
+You are an AI assistant helping with this open-source project. You must strictly follow these workflow rules:
+
+## 1. Registry Verification (CRITICAL)
+- At the start of a session or task instruction, **you must ask the user** for their name, their selected role (Role 1 or Role 2), and which task from [TASKS.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/TASKS.md) they want you to work on.
+- Locate and read [TASKS.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/TASKS.md).
+- Ensure the user's name is entered under that task for their role. If it is empty or missing, write to [TASKS.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/TASKS.md) to register the user's name/handle under that task before coding.
+- This registry update and verification must also be completed manually by human contributors.
+
+## 2. Modularity & File Separation Rule
+- **NEVER** write multiple features or components in a single monolithic file.
+- **ALWAYS** create a **new, separate file** for every new feature, sub-module, component, or helper function.
+- Connect these files via explicit imports/exports.
+- Do **NOT** merge files into a single unified file unless the user explicitly commands: *"make it in a single file now that the project is complete"*.
+
+## 3. Role-Based Workflow
+- **Role 1 (Feature Adder)**: Build feature logic in dedicated new files. When complete, update the task status in [TASKS.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/TASKS.md) to indicate it is ready for Role 2.
+- **Role 2 (Bug Fixer)**: Review the implementation of Role 1, fix any bugs/merging issues, update status to `Role 2 verification pending` when pushed, and finally to `Verified / Closed` once completely verified.
+
+Refer to [AI_RULES.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/AI_RULES.md) for full context and descriptions of these workflows.
