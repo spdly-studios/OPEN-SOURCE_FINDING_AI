@@ -1,46 +1,87 @@
 # Open-Source Contribution Guidelines
 
-Welcome to our open-source project! To ensure smooth collaboration and maintain a high-quality codebase, we follow a structured contribution workflow. This guide outlines how contributors can add features, fix bugs, and verify changes.
+Welcome to **FINDING_AI**! We are thrilled to have you here. To ensure smooth collaboration, maintain a high-quality codebase, and minimize merge conflicts, we follow a structured contribution workflow. 
 
 ---
 
 ## 👥 Contributor Roles
 
-We have defined two distinct roles for contributors to maintain division of labor and high quality:
+We separate duties into two distinct roles to support division of labor, code quality, and active validation.
 
 ### 🚀 Role 1: Feature Adder
-* **Responsibility**: Implement new features or tasks.
+* **Responsibility**: Implement new features or tasks listed in `TASKS.md`.
 * **Workflow**:
-  1. Pull the latest changes from the repository: `git pull origin main`.
-  2. Select an open task/feature from [TASKS.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/TASKS.md).
-  3. Register yourself as the **Feature Adder** by adding your name to the task entry in [TASKS.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/TASKS.md).
-  4. Develop the feature in **separate, modular files** (do not merge everything into a single file or write massive monolithic files). Connect your files using standard imports/exports.
-  5. Commit and push your changes.
+  1. Pull the latest changes from the main branch: `git pull origin main`.
+  2. Select an `[Open]` task from **[TASKS.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/TASKS.md)**.
+  3. Register yourself as the **Feature Adder** by adding your name/GitHub handle to the task entry in `TASKS.md` and setting status to `[Claimed - Role 1]`.
+  4. Develop the feature in **separate, modular files** (do not write large monolithic files or modify unrelated files). Connect files using standard import/export structures.
+  5. Write tests for your feature.
+  6. Commit your changes and open a Pull Request. Update the task status to `[Role 2 verification pending]`.
 
 ### 🛡️ Role 2: Bug Fixer / Verifier
-* **Responsibility**: Review, test, and merge/verify code pushed by Role 1.
+* **Responsibility**: Review, merge-conflict check, test, and verify code submitted by Role 1.
 * **Workflow**:
-  1. When a Feature Adder (Role 1) pushes their changes, the task enters the **Verification Pending** state.
-  2. Look into the implementation, check for bugs, merge conflicts, or style inconsistencies.
-  3. Fix any bugs or conflicts directly in the feature code.
-  4. Once verification is ready to be pushed or is actively being tested, update the registry status in [TASKS.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/TASKS.md) to `Role 2 verification pending`.
-  5. Once fully verified and working, change the status to `Verified / Closed` and add your name as the **Bug Fixer / Verifier** in [TASKS.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/TASKS.md).
+  1. Select a task with status `[Role 2 verification pending]`.
+  2. Register yourself as the **Bug Fixer / Verifier** in `TASKS.md` under the task.
+  3. Review the code. Pull the PR locally and run tests. Look for edge cases, performance issues, or architectural alignment.
+  4. Fix any bugs, style deviations, or merge conflicts directly in the feature's dedicated files.
+  5. Once fully verified, update the task status in `TASKS.md` to `[Verified / Closed]`.
 
 ---
 
-## 📋 Features & Tasks Registry
+## 🌿 Git Branching Conventions
 
-All features, tasks, and assignments are managed in the separate [TASKS.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/TASKS.md) file. 
-
-Before starting any work, please check [TASKS.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/TASKS.md) to claim tasks, enter your name/username under the task you are taking, and update the task's status.
+Name your branches according to the purpose of the work:
+* **Features**: `feature/module-<number>-<short-description>` (e.g. `feature/module-1-login-jwt`)
+* **Bug Fixes**: `bugfix/module-<number>-<short-description>` (e.g. `bugfix/module-3-ollama-timeout`)
+* **Documentation**: `docs/<description>` (e.g. `docs/setup-instructions`)
+* **Refactoring**: `refactor/<description>` (e.g. `refactor/skill-graph-indexes`)
 
 ---
 
-## 🤖 Rules for AI Agents
+## ✍️ Commit Conventions
 
-AI agents participating in this project MUST read and follow the instructions in the [AI_RULES.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/AI_RULES.md) file.
-Key points include:
-1. Always check the **Features & Tasks Registry** before beginning work.
-2. Only claim tasks that are in `[Open]` status.
-3. Respect role boundaries (Feature Adder vs. Bug Fixer).
-4. **Modularity Principle**: Always write new features in separate, dedicated files to prevent git conflicts.
+We follow the **Conventional Commits** specification. Commits should be structured as follows:
+`<type>(<scope>): <description>`
+
+**Common Types**:
+* `feat`: A new feature (corresponds to Role 1)
+* `fix`: A bug fix (corresponds to Role 2 or immediate patches)
+* `docs`: Documentation changes only
+* `style`: Changes that do not affect the meaning of the code (white-space, formatting)
+* `refactor`: A code change that neither fixes a bug nor adds a feature
+* `test`: Adding missing tests or correcting existing tests
+
+**Examples**:
+* `feat(auth): implement employer account registration schema`
+* `fix(matching): resolve divide-by-zero bug in experience decay`
+* `docs(readme): add link to local LLM configuration`
+
+---
+
+## 📐 Modularity & Coding Standards
+
+To prevent merge conflicts in a highly collaborative environment, we enforce the **Strict Modularity Rule**:
+1. **Never append unrelated code** to existing monolithic files.
+2. Every new feature, UI widget, database helper, or API routing file must be created as a **new, dedicated file** and imported explicitly.
+3. Keep frontend components reusable and isolated.
+4. Keep backend routing handlers thin; move business logic into dedicated service files (e.g. `services/matching.py`, `services/ollama_client.py`).
+5. **Code Style**:
+   - **Frontend**: Follow ESLint and Prettier formatting (configured in the repository root). Use TypeScript types strictly; avoid `any`.
+   - **Backend**: Follow PEP 8 guidelines for Python code. Document API functions with clear type hints.
+
+---
+
+## 📤 Pull Request Checklist
+
+When submitting a Pull Request (PR):
+1. Use our standard **[Pull Request Template](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/.github/PULL_REQUEST_TEMPLATE.md)** to document your changes.
+2. Link the issue or specify the `TASKS.md` task number being addressed.
+3. Ensure all tests pass.
+4. Explicitly state whether you are acting as **Role 1 (Feature Adder)** or **Role 2 (Verifier)**.
+
+---
+
+## 🤖 AI Agent Guidelines
+
+If you are using an AI assistant (like Roo-Code, Cline, or Cursor) to help you code, please ensure the agent complies with our strict protocols in **[AI_RULES.md](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/AI_RULES.md)** and **[.cursorrules](file:///c:/Users/anshul%20prajapati/OneDrive/Desktop/OPEN-SOURCE_FINDING_AI/.cursorrules)**. AI agents must ask for your identity and register tasks in `TASKS.md` prior to code generation.
